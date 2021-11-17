@@ -1,0 +1,21 @@
+<launch>
+    <arg name="pkg_name" value="pwm_pca9685"/>
+    <arg name="node_name" default="pca9685_node"/>
+    <arg name="node_type" default="pca9685_node"/>
+
+    <arg name="param_file_name" default="default" doc="Specify a param file. ex:default."/>
+    <arg name="output" default="screen" doc="output display"/>
+    <arg name="req" default="true"/>
+
+    <node name="$(arg node_name)"
+          pkg="$(arg pkg_name)"
+          type="$(arg node_type)"
+          output="$(arg output)"
+          required="$(arg req)">
+
+        <rosparam>
+            frequency: 50
+        </rosparam>
+    </node>
+
+</launch>
