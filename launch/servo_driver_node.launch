@@ -15,6 +15,7 @@
 
         <rosparam>
             frequency: 50
+            device: /dev/i2c-8
         </rosparam>
     </node>
 
