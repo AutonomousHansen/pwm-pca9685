@@ -16,6 +16,8 @@
         <rosparam>
             frequency: 50
             device: /dev/i2c-8
+            pwm_min: [1900, 2000, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+            pwm_max: [5000, 7600, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
         </rosparam>
     </node>
 
