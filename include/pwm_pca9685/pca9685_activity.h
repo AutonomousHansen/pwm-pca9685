@@ -52,7 +52,7 @@ class PCA9685Activity {
     bool spinOnce();
 
     void onCommand(const std_msgs::Int32MultiArrayPtr& msg);
-    static std_msgs::Bool onCommandServ(const std_msgs::Int32MultiArrayPtr& msg);
+    static bool onCommandServ(const std_msgs::Int32MultiArrayPtr& msg, const std_msgs::Bool& done);
 
     bool set(uint8_t channel, uint16_t value);
 

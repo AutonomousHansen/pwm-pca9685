@@ -220,15 +220,16 @@ void PCA9685Activity::onCommand(const std_msgs::Int32MultiArrayPtr &msg) {
     }
 }
 
-std_msgs::Bool PCA9685Activity::onCommandServ(const std_msgs::Int32MultiArrayPtr& msg) {
+bool PCA9685Activity::onCommandServ(const std_msgs::Int32MultiArrayPtr& msg, const std_msgs::Bool& done) {
     ros::Time time = ros::Time::now();
     uint64_t t = 1000 * (uint64_t)time.sec + (uint64_t)time.nsec / 1e6;
-    std_msgs::Bool reply;
+    // std_msgs::Bool reply;
 
     if(msg->data.size() != 16) {
         ROS_ERROR("array is not have a size of 16");
-        reply.data = false;
-        return reply;
+        // reply.data = false;
+        // return reply;
+        return false;
     }
 
     for(int channel = 0; channel < 16; channel++) {
@@ -248,8 +249,9 @@ std_msgs::Bool PCA9685Activity::onCommandServ(const std_msgs::Int32MultiArrayPtr
       last_set_times[channel] = t;
       last_data[channel] = msg->data[channel];
     }
-    reply.data = true;
-    return reply;
+    // reply.data = true;
+    // return reply;
+    return true;
 }
 
 
