@@ -164,22 +164,22 @@ bool PCA9685Activity::spinOnce() {
     ros::Time time = ros::Time::now();
     uint64_t t = 1000 * (uint64_t)time.sec + (uint64_t)time.nsec / 1e6;
 
-    if(seq++ % 10 == 0) {
-      for(int channel = 0; channel < 16; channel++) {
-        // positive timeout: timeout when no cammand is received
-        if(param_timeout[channel] > 0 && t - last_set_times[channel] > std::abs(param_timeout[channel])) {
-          set(channel, param_timeout_value[channel]);
-        }
-        // negative timeout: timeout when value doesn't change
-	else if(param_timeout[channel] < 0 && t - last_change_times[channel] > std::abs(param_timeout[channel])) {
-          set(channel, param_timeout_value[channel]);
-	  ROS_WARN_STREAM("timeout " << channel);
-        }
-	// zero timeout: no timeout
-      }
+    // if(seq++ % 10 == 0) {
+    for(int channel = 0; channel < 16; channel++) {
+    // positive timeout: timeout when no cammand is received
+    // if(param_timeout[channel] > 0 && t - last_set_times[channel] > std::abs(param_timeout[channel])) {
+        set(channel, last_data[channel]);
     }
+        // negative timeout: timeout when value doesn't change
+	// else if(param_timeout[channel] < 0 && t - last_change_times[channel] > std::abs(param_timeout[channel])) {
+    //       set(channel, param_timeout_value[channel]);
+	//   ROS_WARN_STREAM("timeout " << channel);
+    //     }
+	// // zero timeout: no timeout
+    //   }
+    //}
 
-    return true;    
+    return true;
 }
 
 bool PCA9685Activity::stop() {
@@ -218,6 +218,38 @@ void PCA9685Activity::onCommand(const std_msgs::Int32MultiArrayPtr &msg) {
       last_set_times[channel] = t;
       last_data[channel] = msg->data[channel];
     }
+}
+
+std_msgs::Bool PCA9685Activity::onCommandServ(const std_msgs::Int32MultiArrayPtr& msg) {
+    ros::Time time = ros::Time::now();
+    uint64_t t = 1000 * (uint64_t)time.sec + (uint64_t)time.nsec / 1e6;
+    std_msgs::Bool reply;
+
+    if(msg->data.size() != 16) {
+        ROS_ERROR("array is not have a size of 16");
+        reply.data = false;
+        return reply;
+    }
+
+    for(int channel = 0; channel < 16; channel++) {
+      if(msg->data[channel] < 0) continue;
+
+    //   if(msg->data[channel] != last_data[channel]) {
+    //       last_change_times[channel] = t;
+    //   }
+
+    //   if(msg->data[channel] > param_pwm_max[channel]) {
+	//     set(channel, param_pwm_max[channel]);
+    //   } else if(msg->data[channel] < param_pwm_min[channel]) {
+    //       set(channel, param_pwm_min[channel]);
+    //   } else {
+    //       set(channel, msg->data[channel]);
+    //   }
+      last_set_times[channel] = t;
+      last_data[channel] = msg->data[channel];
+    }
+    reply.data = true;
+    return reply;
 }
 
 

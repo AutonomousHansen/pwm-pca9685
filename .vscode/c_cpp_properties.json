@@ -1,0 +1,29 @@
+{
+  "configurations": [
+    {
+      "browse": {
+        "databaseFilename": "",
+        "limitSymbolsToIncludedHeaders": true
+      },
+      "includePath": [
+        "/home/roomba1/cartographer_ws/install_isolated/include/**",
+        "/home/roomba1/racecar/catkin_ws/devel/include/**",
+        "/opt/ros/melodic/include/**",
+        "/home/roomba1/racecar/catkin_ws/src/knightrider-racecar/third_party/racecar/ackermann_cmd_mux/include/**",
+        "/home/roomba1/racecar/catkin_ws/src/knightrider-racecar/collision_detection/include/**",
+        "/home/roomba1/racecar/catkin_ws/src/knightrider-racecar/third_party/racecar-controllers/racecar_potential_field_controller/include/**",
+        "/home/roomba1/racecar/catkin_ws/src/knightrider-racecar/knightrider-common/rosutils/include/**",
+        "/home/roomba1/racecar/catkin_ws/src/knightrider-racecar/knightrider-common/simple_pure_pursuit/include/**",
+        "/home/roomba1/racecar/catkin_ws/src/knightrider-racecar/knightrider-common/simple_speed_controller/include/**",
+        "/home/roomba1/racecar/catkin_ws/src/knightrider-racecar/third_party/racecar/sparkfun_9dof_razor_imu_m0/include/**",
+        "/home/roomba1/racecar/catkin_ws/src/knightrider-racecar/traffic_coordinator/include/**",
+        "/home/roomba1/racecar/catkin_ws/src/knightrider-racecar/third_party/vesc/vesc_ackermann/include/**",
+        "/home/roomba1/racecar/catkin_ws/src/knightrider-racecar/third_party/vesc/vesc_driver/include/**",
+        "/home/roomba1/racecar/catkin_ws/src/knightrider-racecar/third_party/zed-ros-wrapper/zed_interfaces/include/**",
+        "/usr/include/**"
+      ],
+      "name": "ROS"
+    }
+  ],
+  "version": 4
+}

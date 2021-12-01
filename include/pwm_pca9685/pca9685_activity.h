@@ -8,6 +8,7 @@
 #include <sys/ioctl.h>
 #include <fcntl.h>
 
+#include <std_msgs/Bool.h>
 #include <std_msgs/Int32.h>
 #include <std_msgs/Int32MultiArray.h>
 
@@ -51,11 +52,13 @@ class PCA9685Activity {
     bool spinOnce();
 
     void onCommand(const std_msgs::Int32MultiArrayPtr& msg);
+    static std_msgs::Bool onCommandServ(const std_msgs::Int32MultiArrayPtr& msg);
+
     bool set(uint8_t channel, uint16_t value);
 
-    uint64_t last_set_times[16];
-    uint64_t last_change_times[16];
-    int last_data[16];
+    static uint64_t last_set_times[16];
+    static uint64_t last_change_times[16];
+    static int last_data[16];
 
   private:
     bool reset();
@@ -75,8 +78,8 @@ class PCA9685Activity {
     int param_frequency;
     std::vector<int> param_timeout;
     std::vector<int> param_timeout_value;
-    std::vector<int> param_pwm_min;
-    std::vector<int> param_pwm_max;
+    static std::vector<int> param_pwm_min;
+    static std::vector<int> param_pwm_max;
 
     // ROS publishers
 
@@ -84,6 +87,7 @@ class PCA9685Activity {
     ros::Subscriber sub_command;
 
     // ROS services
+    ros::ServiceServer service = nh.advertiseService("pwm_service", onCommandServ);
 };
 
 }
